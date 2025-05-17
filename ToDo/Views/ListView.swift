@@ -10,11 +10,15 @@ import SwiftUI
 struct ListView: View {
     var body: some View {
         
-        @State var item = ["first item", "second item", "Third"]
+        @State var items: [Item] = [
+            Item(title: "first one is here", isCompleted: true),
+            Item(title: "second one is here", isCompleted: false),
+            Item(title: "thirds one is here", isCompleted: true)
+        ]
      
         List{
-            ForEach(item, id: \.self) { item in
-                ListRowView(title: item)
+            ForEach(items) { item in
+                ListRowView(item: item)
             }
         }
         
@@ -28,7 +32,7 @@ struct ListView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink("Add") {
-                    Text("Destionation")
+                    AddView()
                 }
             }
         }
