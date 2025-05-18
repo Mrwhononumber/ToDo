@@ -14,6 +14,7 @@ struct AddView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var textFieldText: String = ""
+    @State var isShowingAlert: Bool = false
     
     var body: some View {
         ScrollView {
@@ -39,11 +40,27 @@ struct AddView: View {
             .padding()
         }
         .navigationTitle("Add Item")
+        .alert(isPresented: $isShowingAlert) { 
+            Alert(title: AlertContext.invalidText.title,
+                  message: AlertContext.invalidText.message,
+                  dismissButton: AlertContext.invalidText.dismissButton)
+        }
     }
     
     func saveItem() {
-        listViewModel.addItem(title: textFieldText)
-        dismiss()
+        if isValidText(textFieldText) {
+            listViewModel.addItem(title: textFieldText)
+            dismiss()
+        }
+      
+    }
+    
+    func isValidText(_ text: String) -> Bool {
+        if textFieldText.count < 3 {
+             isShowingAlert = true
+            return false
+        }
+        return true
     }
 }
 
