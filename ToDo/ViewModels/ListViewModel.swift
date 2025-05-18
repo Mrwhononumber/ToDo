@@ -7,24 +7,48 @@
 
 import Foundation
 
-class ListViewModel: ObservableObject {
-     
-    @Published var items: [Item] = []
+final  class ListViewModel: ObservableObject {
+    
+    @Published var alertItem: AlertItem?
+    @Published var items: [Item] = [] {
+        didSet {
+            saveItem()
+        }
+    }
+    let itemsKey = "itemList"
     
     init() {
-        getItems()
-    }
-    
-    func getItems() {
-        let newItems = [
-            Item(title: "first one is here", isCompleted: true),
-            Item(title: "second one is here", isCompleted: false),
-            Item(title: "thirds one is here", isCompleted: true)
-        ]
-        items.append(contentsOf: newItems)
+        loadItems()
     }
     
     
+    func loadItems() {
+        
+        guard let savedData = UserDefaults.standard.data(forKey: itemsKey) else { return }
+              do {
+                  let savedItems = try JSONDecoder().decode([Item].self, from: savedData)
+                  self.items = savedItems
+              } catch {
+                  alertItem = AlertContext.failedToLoad
+                  return
+              }
+
+    }
+    
+    
+    func saveItem() {
+        do {
+            let encodedData = try JSONEncoder().encode(items)
+               UserDefaults.standard.set(encodedData, forKey: itemsKey)
+        } catch {
+            alertItem = AlertContext.failedToSave
+            return
+        }
+        
+        
+    }
+
+        
     func deleteItem(indexSet: IndexSet) {
         items.remove(atOffsets: indexSet)
     }
@@ -34,10 +58,12 @@ class ListViewModel: ObservableObject {
         items.move(fromOffsets: firstPosition, toOffset: lastPosition)
     }
     
+    
     func addItem(title: String) {
         let newItem = Item(title: title, isCompleted: false)
         items.append(newItem)
     }
+    
     
     func updateItem(item: Item) {
         guard let index = items.firstIndex(where: {$0.id == item.id }) else { return } /// Get the index of the selected item at the items array

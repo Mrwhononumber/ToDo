@@ -40,7 +40,8 @@ struct AddView: View {
             .padding()
         }
         .navigationTitle("Add Item")
-        .alert(isPresented: $isShowingAlert) { 
+        
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: AlertContext.invalidText.title,
                   message: AlertContext.invalidText.message,
                   dismissButton: AlertContext.invalidText.dismissButton)

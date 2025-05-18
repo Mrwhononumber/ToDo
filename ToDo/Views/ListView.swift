@@ -12,9 +12,6 @@ struct ListView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     
     var body: some View {
-        
-  
-     
         List{
             ForEach(listViewModel.items) { item in
                 ListRowView(item: item)
@@ -30,18 +27,29 @@ struct ListView: View {
         
         .listStyle(.plain)
         .navigationTitle("Todo List")
+        
         .toolbar{
             ToolbarItem(placement: .topBarLeading) {
                 EditButton()
+                    
             }
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink("Add") {
                     AddView()
                 }
+                
             }
         }
+        .alert(item: $listViewModel.alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        }
     }
+        
+        
 }
+
 
 #Preview {
    NavigationView {
