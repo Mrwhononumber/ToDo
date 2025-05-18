@@ -8,9 +8,20 @@
 import Foundation
 
 struct Item: Identifiable {
-    let id: String = UUID().uuidString 
+    let id: String
     let title: String
     let isCompleted: Bool
+    
+    init(id: String = UUID().uuidString  , title: String, isCompleted: Bool) {
+        self.id = UUID().uuidString
+        self.title = title
+        self.isCompleted = isCompleted
+    }
+    
+    func updateCompletionStatus() -> Item {
+        return Item(id: id, title: title, isCompleted: !isCompleted)
+    }
+    
 }
 
 struct MockItem {

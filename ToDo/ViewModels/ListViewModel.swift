@@ -38,5 +38,10 @@ class ListViewModel: ObservableObject {
         let newItem = Item(title: title, isCompleted: false)
         items.append(newItem)
     }
+    
+    func updateItem(item: Item) {
+        guard let index = items.firstIndex(where: {$0.id == item.id }) else { return } /// Get the index of the selected item at the items array
+        items[index] = item.updateCompletionStatus()                                  /// Update the selected item's isCompleted status
+    }
 }
  
