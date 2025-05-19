@@ -31,22 +31,24 @@ struct AddView: View {
                     Text("Save ")
                         .font(.title3)
                                    .fontWeight(.semibold)
-                                   .frame(width: 260, height: 50)
+                                   .frame(height: 55)
+                                   .frame(maxWidth:.infinity)
                                    .foregroundStyle(.white)
-                                   .background(Color.accentColor)
+                                   .background(.red)
                                    .clipShape(.rect(cornerRadius: 10))
+                                   .padding()
                 }
             }
             .padding()
         }
         .navigationTitle("Add Item")
-        
         .alert(isPresented: $isShowingAlert) {
             Alert(title: AlertContext.invalidText.title,
                   message: AlertContext.invalidText.message,
                   dismissButton: AlertContext.invalidText.dismissButton)
         }
     }
+
     
     func saveItem() {
         if isValidText(textFieldText) {

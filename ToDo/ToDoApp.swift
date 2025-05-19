@@ -17,6 +17,7 @@ struct ToDoApp: App {
             NavigationView {
                 ListView()
             }
+            .tint(.red)
             .environmentObject(listViewModel)
         }
     }
