@@ -10,16 +10,11 @@ import Foundation
 final  class ListViewModel: ObservableObject {
     
     @Published var alertItem: AlertItem?
-    @Published var items: [Item] = [] {
-        didSet {
-            saveItem()
-        }
-    }
+    @Published var items: [Item] = [] { didSet { saveItem() } }
+   
     let itemsKey = "itemList"
     
-    init() {
-        loadItems()
-    }
+    init() { loadItems() }
     
     
     func loadItems() {
@@ -32,7 +27,6 @@ final  class ListViewModel: ObservableObject {
                   alertItem = AlertContext.failedToLoad
                   return
               }
-
     }
     
     
@@ -44,8 +38,6 @@ final  class ListViewModel: ObservableObject {
             alertItem = AlertContext.failedToSave
             return
         }
-        
-        
     }
 
         

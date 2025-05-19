@@ -21,8 +21,8 @@ struct Item: Identifiable, Codable {
     func updateCompletionStatus() -> Item {
         return Item(id: id, title: title, isCompleted: !isCompleted)
     }
-    
 }
+
 
 struct MockItem {
     static let sampleItem = Item(title: "this is a sample item", isCompleted: true)

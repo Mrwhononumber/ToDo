@@ -51,10 +51,8 @@ struct EmptyStateView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: DispatchWorkItem(block: {
             withAnimation(
                 Animation
-                    
                     .easeInOut(duration: 2)
                     .repeatForever()
-                
             ) {
                 animate  = true
             }
@@ -67,6 +65,5 @@ struct EmptyStateView: View {
     NavigationView {
         EmptyStateView()
             .navigationTitle("Hello")
-
     }
 }

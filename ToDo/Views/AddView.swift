@@ -11,7 +11,6 @@ struct AddView: View {
     
     
     @EnvironmentObject var listViewModel: ListViewModel
-    
     @Environment(\.dismiss) private var dismiss
     @State var textFieldText: String = ""
     @State var isShowingAlert: Bool = false
@@ -55,8 +54,8 @@ struct AddView: View {
             listViewModel.addItem(title: textFieldText)
             dismiss()
         }
-      
     }
+    
     
     func isValidText(_ text: String) -> Bool {
         if textFieldText.count < 3 {

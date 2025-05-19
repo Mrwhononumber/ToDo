@@ -14,13 +14,10 @@ struct AlertContext {
     
     static let failedToSave = AlertItem(title: Text("Save Error"),
                                         message: Text("There was a problem saving your items."),
-                                        dismissButton: .default(Text("OK"))
-    )
+                                        dismissButton: .default(Text("OK")))
 
     static let failedToLoad = AlertItem(title: Text("Load Error"),
                                         message: Text("There was a problem loading your items."),
-                                        dismissButton: .default(Text("OK"))
-    )
-
+                                        dismissButton: .default(Text("OK")))
     }
 

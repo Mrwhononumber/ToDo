@@ -39,15 +39,12 @@ struct ListView: View {
             ToolbarItem(placement: .topBarLeading) {
                 EditButton()
             }
-
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink("Add") {
                     AddView()
                 }
             }
         }
-    //    .tint(.primary)
-
         .alert(item: $listViewModel.alertItem) { alertItem in
             Alert(title: alertItem.title,
                   message: alertItem.message,
