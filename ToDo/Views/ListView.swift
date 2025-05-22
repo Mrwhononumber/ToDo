@@ -36,12 +36,14 @@ struct ListView: View {
             }
         }    
         .toolbar{
-            ToolbarItem(placement: .topBarLeading) {
-                EditButton()
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink("Add") {
-                    AddView()
+            if !listViewModel.items.isEmpty {
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink("Add") {
+                        AddView()
+                    }
                 }
             }
         }
